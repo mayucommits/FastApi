@@ -20,15 +20,20 @@ class Patient(BaseModel):
             raise ValueError('Not a valid domain')
         return value
     
+    @field_validator('name')
+    @classmethod
+    def transform_name(cls, value: str) -> str:
+        return value.upper()
+    
 def update_patient_data(patient: Patient):
-    # print(patient.name)
+    print(patient.name)
     # print(patient.age)
     # print(patient.allergies)
     # print(patient.married)
     print(patient.email)
     print('updated')
         
-patient_info = {'name':'nitish', 'email':'abc@axis.com', 'age': '30', 'weight': 75.2, 'married': True, 'allergies': ['pollen', 'dust'], 'contact_details':{'phone':'2353462'}}
+patient_info = {'name':'nitish', 'email':'abc@hdfc.com', 'age': '30', 'weight': 75.2, 'married': True, 'allergies': ['pollen', 'dust'], 'contact_details':{'phone':'2353462'}}
 
 patient1 = Patient(**patient_info) # validation -> type coercion
 
